@@ -20,11 +20,13 @@ export default function DashboardLayout({
     <html lang="es">
       <body className={inter.className}>
         <Sidebar />
-        <header className="hidden sm:block">
-          <Navbar />
-        </header>
-        <main className='mx-2 mt-16 sm:ml-[300px] sm:mt-3'>
-          {children}
+        <main className='flex flex-col h-full mr-2 mt-16 sm:ml-[280px] sm:mt-3 gap-2'>
+          <div className="hidden sm:block">
+            <Navbar />
+          </div>
+          <div className="h-45 rounded-xl p-4 flex-grow flex-1">
+           {children}
+          </div>
         </main>
       </body>
     </html>
