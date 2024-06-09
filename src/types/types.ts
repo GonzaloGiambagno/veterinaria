@@ -18,3 +18,11 @@ export interface RegisterBody {
   id_veterinaria: number
 }
 
+export interface User {
+  id: number; 
+  email: string;
+  username: string;
+  password: string;
+  rol: string;
+  id_veterinaria: number; 
+}

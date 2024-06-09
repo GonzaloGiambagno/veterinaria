@@ -3,6 +3,24 @@ import db from '@/lib/db'
 import { RegisterBody } from "@/types/types";
 import { hash } from "bcrypt";
 
+// Traer usuarios
+export async function GET(req: Request) {
+    try {
+         const users: User[] = await db.user.findMany();
+ 
+         return NextResponse.json({
+             users: users,
+             message: 'Lista de usuarios obtenida correctamente'
+           }, { status: 200 });
+     } catch (error) {
+         return NextResponse.json({
+             users: null,
+             message: 'Error obteniendo la lista de usuarios'
+           }, { status: 500 });
+    }
+ }
+
+
 export async function POST(req: Request) {
    try {
         const body: RegisterBody = await req.json() as RegisterBody;
