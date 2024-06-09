@@ -1,4 +1,3 @@
-import { ToogleThemes } from "@/components/ui/toogleThemes";
 
 export default function Page() {
   return (

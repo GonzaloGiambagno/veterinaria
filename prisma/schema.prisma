@@ -19,7 +19,7 @@ model User {
   email String @unique
   password String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime? @updatedAt
   rol String
   id_veterinaria Int
 }

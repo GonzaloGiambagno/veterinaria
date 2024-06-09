@@ -1,6 +1,6 @@
 'use client';
 
-import { SidebarItems } from '@/types';
+import { SidebarItems } from '@/types/types';
 import {
   Sheet,
   SheetClose,

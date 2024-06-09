@@ -9,3 +9,12 @@ export interface SidebarItems {
   }>;
   extras?: ReactNode;
 }
+
+export interface RegisterBody {
+  email: string;
+  username: string;
+  password: string;
+  rol: string;
+  id_veterinaria: number
+}
+

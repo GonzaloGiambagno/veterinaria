@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
 import { SidebarButton } from './sidebar-button';
-import { SidebarItems } from '@/types';
+import { SidebarItems } from '@/types/types';
 import Link from 'next/link';
 import { Separator } from '../ui/separator';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
@@ -9,6 +9,8 @@ import { Button } from '../ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { LogOut, MoreHorizontal, Settings } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { signOut, useSession } from 'next-auth/react';
+
 
 interface SidebarDesktopProps {
   sidebarItems: SidebarItems;
@@ -16,7 +18,9 @@ interface SidebarDesktopProps {
 
 export function SidebarDesktop(props: SidebarDesktopProps) {
   const pathname = usePathname();
+  const { data: session } = useSession();
 
+  
   return (
     <aside className='w-[270px] max-w-xs h-screen fixed left-0 top-0 z-40 border-r'>
       <div className='h-full px-3 py-4'>
@@ -47,7 +51,7 @@ export function SidebarDesktop(props: SidebarDesktopProps) {
                         <AvatarImage src='https://www.purina.com.ar/sites/default/files/styles/webp/public/2022-10/purina-consulta-veterinaria-para-mascotas-lo-que-debes-saber.jpg.webp?itok=Wk4MV9Ic' />
                         <AvatarFallback>Vete</AvatarFallback>
                       </Avatar>
-                      <span>Veteriana Gonza</span>
+                        {session?.user ? <span>{session.user.username}</span> : null}
                     </div>
                     <MoreHorizontal size={20} />
                   </div>
@@ -60,7 +64,9 @@ export function SidebarDesktop(props: SidebarDesktopProps) {
                       Configuración
                     </SidebarButton>
                   </Link>
-                  <SidebarButton size='sm' icon={LogOut} className='w-full'>
+                  <SidebarButton size='sm' icon={LogOut} className='w-full' onClick={()=>{
+                    signOut();
+                  }}>
                     Cerrar Sesión
                   </SidebarButton>
                 </div>
