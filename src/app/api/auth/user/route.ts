@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import db from '@/lib/db'
 import { RegisterBody } from "@/types/types";
 import { hash } from "bcrypt";
+import { PrismaClient, User } from "@prisma/client";
 
 // Traer usuarios
 export async function GET(req: Request) {
@@ -18,13 +19,14 @@ export async function GET(req: Request) {
              message: 'Error obteniendo la lista de usuarios'
            }, { status: 500 });
     }
- }
+}
 
+const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
    try {
         const body: RegisterBody = await req.json() as RegisterBody;
-        const { email, username, password, rol, id_veterinaria } = body;
+        const { email, username, name, password, rol, id_veterinaria } = body;
 
         const emailExistente = await db.user.findUnique({
             where: { email: email}
@@ -35,7 +37,7 @@ export async function POST(req: Request) {
             }, { status: 409})
         }
 
-        const usuarioExistente = await db.user.findUnique({
+        const usuarioExistente = await prisma.user.findUnique({
             where: { username: username}
         })
         if (usuarioExistente) {
@@ -50,6 +52,7 @@ export async function POST(req: Request) {
             data: {
                 email,
                 username,
+                name,
                 password: criptPassword, 
                 rol,
                 id_veterinaria 
@@ -61,9 +64,10 @@ export async function POST(req: Request) {
             message: 'Usuario creado correctamente'
           }, { status: 201 });
     } catch (error) {
+        console.error("Error creating user:", error);
         return NextResponse.json({
             user: null,
-            message: 'Error procesando la solicitud'
+            message: 'Error procesando la solicitud',
           }, { status: 500 });
    }
 }

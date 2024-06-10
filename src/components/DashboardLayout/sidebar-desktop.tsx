@@ -10,6 +10,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { LogOut, MoreHorizontal, Settings } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from "next/navigation"
+
 
 
 interface SidebarDesktopProps {
@@ -51,7 +53,7 @@ export function SidebarDesktop(props: SidebarDesktopProps) {
                         <AvatarImage src='https://www.purina.com.ar/sites/default/files/styles/webp/public/2022-10/purina-consulta-veterinaria-para-mascotas-lo-que-debes-saber.jpg.webp?itok=Wk4MV9Ic' />
                         <AvatarFallback>Vete</AvatarFallback>
                       </Avatar>
-                        {session?.user ? <span>{session.user.username}</span> : null}
+                        {session?.user ? <span>{session.user.name}</span> : null}
                     </div>
                     <MoreHorizontal size={20} />
                   </div>
@@ -59,7 +61,7 @@ export function SidebarDesktop(props: SidebarDesktopProps) {
               </PopoverTrigger>
               <PopoverContent className='mb-2 w-56 p-3 rounded-[1rem]'>
                 <div className='space-y-1'>
-                  <Link href='/'>
+                  <Link href="/dashboard/perfil">
                     <SidebarButton size='sm' icon={Settings} className='w-full'>
                       Configuración
                     </SidebarButton>

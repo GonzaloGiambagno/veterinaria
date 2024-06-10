@@ -16,6 +16,8 @@ import { usePathname } from 'next/navigation';
 import { Separator } from '../ui/separator';
 import { Drawer, DrawerContent, DrawerTrigger } from '../ui/drawer';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from "next/navigation"
 
 interface SidebarMobileProps {
   sidebarItems: SidebarItems;
@@ -23,6 +25,7 @@ interface SidebarMobileProps {
 
 export function SidebarMobile(props: SidebarMobileProps) {
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   return (
     <Sheet>
@@ -63,12 +66,12 @@ export function SidebarMobile(props: SidebarMobileProps) {
               <DrawerTrigger asChild>
                 <Button variant='ghost' className='w-full justify-start'>
                   <div className='flex justify-between items-center w-full'>
-                    <div className='flex gap-2'>
+                  <div className='flex gap-2'>
                       <Avatar className='h-5 w-5'>
-                        <AvatarImage src='https://github.com/max-programming.png' />
-                        <AvatarFallback>Max Programming</AvatarFallback>
+                        <AvatarImage src='https://www.purina.com.ar/sites/default/files/styles/webp/public/2022-10/purina-consulta-veterinaria-para-mascotas-lo-que-debes-saber.jpg.webp?itok=Wk4MV9Ic' />
+                        <AvatarFallback>Vete</AvatarFallback>
                       </Avatar>
-                      <span>Max Programming</span>
+                        {session?.user ? <span>{session.user.name}</span> : null}
                     </div>
                     <MoreHorizontal size={20} />
                   </div>
@@ -76,13 +79,15 @@ export function SidebarMobile(props: SidebarMobileProps) {
               </DrawerTrigger>
               <DrawerContent className='mb-2 p-2'>
                 <div className='flex flex-col space-y-2 mt-2'>
-                  <Link href='/'>
+                  <Link href="/dashboard/perfil">
                     <SidebarButton size='sm' icon={Settings} className='w-full'>
-                      Account Settings
+                      Configuración
                     </SidebarButton>
                   </Link>
-                  <SidebarButton size='sm' icon={LogOut} className='w-full'>
-                    Log Out
+                  <SidebarButton size='sm' icon={LogOut} className='w-full' onClick={()=>{
+                    signOut();
+                  }}>
+                    Cerrar Sesión
                   </SidebarButton>
                 </div>
               </DrawerContent>
