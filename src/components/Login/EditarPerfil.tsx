@@ -20,7 +20,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-  username: z.string().min(5).optional(),
+  // username: z.string().min(5).optional(),
   newEmail: z.string().email().optional(),
   currentPassword: z.string(),
   newPassword: z.string().min(6).optional(),
@@ -35,7 +35,7 @@ export function EditarPerfil() {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      name: "",
       newEmail: "",
       currentPassword: "",
       newPassword: "",
@@ -45,13 +45,12 @@ export function EditarPerfil() {
 
   useEffect(() => {
     if (session && session.user) {
-      const { username, email } = session.user;
-      form.setValue("username", username || "");
+      const { name, email } = session.user;
+      form.setValue("name", name || "");
       form.setValue("newEmail", email || "" );
     }
   }, [session]);
 
-  console.log(session)
 
   const onSubmit = async(values: z.infer<typeof formSchema>) => {
     try {
@@ -88,12 +87,12 @@ export function EditarPerfil() {
           <CardContent className="grid gap-3">
               <FormField
                 control={form.control}
-                name="username"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-white">Usuario</FormLabel>
                     <FormControl>
-                      <Input placeholder="" {...field} />
+                      <Input placeholder="" {...field} disabled/>
                     </FormControl>
                     <FormMessage className="text-white/70"/>
                   </FormItem>

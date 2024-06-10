@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
-import db from '@/lib/db'
-import { hash } from "bcrypt";
 import { PrismaClient, Veterinaria } from "@prisma/client";
 const prisma = new PrismaClient();
-
 
 interface VeteBody {
     nombre: string;
