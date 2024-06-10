@@ -26,7 +26,7 @@ const prisma = new PrismaClient();
 export async function POST(req: Request) {
    try {
         const body: RegisterBody = await req.json() as RegisterBody;
-        const { email, username, name, password, rol, id_veterinaria } = body;
+        const { email, username, name, password, rol, veterinariaId } = body;
 
         const emailExistente = await db.user.findUnique({
             where: { email: email}
@@ -48,14 +48,14 @@ export async function POST(req: Request) {
 
         const criptPassword = await hash(password, 10)
 
-        const newUser = await db.user.create({
+        const newUser = await prisma.user.create({
             data: {
                 email,
                 username,
                 name,
                 password: criptPassword, 
                 rol,
-                id_veterinaria 
+                veterinariaId
             }
         })
 

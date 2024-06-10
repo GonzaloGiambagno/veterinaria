@@ -16,5 +16,5 @@ export interface RegisterBody {
   name: string;
   password: string;
   rol: string;
-  id_veterinaria: number
+  veterinariaId: number
 }

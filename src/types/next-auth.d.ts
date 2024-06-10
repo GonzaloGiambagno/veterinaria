@@ -9,21 +9,20 @@ declare module "next-auth" {
       id:string;
       username: string,
       rol: string, 
-      id_veterinaria: number,
-      accessToken: string
+      veterinariaId: number | null,
     } & DefaultSession
   }
 
   interface User extends DefaultUser {
     username: string,
     rol: string, 
-    id_veterinaria: number,
+    veterinariaId: number | null,
   }
 
   interface User extends AdapterUser {
     username: string,
     rol: string, 
-    id_veterinaria: number,
+    veterinariaId: number | null,
   }
 }
 
@@ -31,7 +30,7 @@ declare module "next-auth/jwt" {
   interface JWT extends DefaultJWT {
     username: string,
     rol: string, 
-    id_veterinaria: number,
+    veterinariaId: number | null,
   }
 }
 
@@ -39,6 +38,6 @@ declare module "@auth/core/types" {
   interface User {
     username: string,
     rol: string, 
-    id_veterinaria: number,
+    veterinariaId: number | null,
   }
 }

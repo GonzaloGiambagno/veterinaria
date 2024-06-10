@@ -33,12 +33,11 @@ export const authOptions: NextAuthOptions = {
 
           return user;
 
-          }
+        }
       })
   ],
   callbacks: {
     async jwt({ token, user, session }){
-      console.log({token, user, session})
       if(user) {
         return {
           ...token,
@@ -46,13 +45,12 @@ export const authOptions: NextAuthOptions = {
           username: user.username,
           email: user.email,
           rol: user.rol,
-          id_veterinaria: user.id_veterinaria,
+          veterinariaId: user.veterinariaId,
         }
       }
       return token
     },
     async session({ session, token, user }){
-      console.log({token, user, session})
       return {
         ...session,
         user: {
@@ -61,7 +59,7 @@ export const authOptions: NextAuthOptions = {
           username: token.username,
           email: token.email,
           rol: token.rol,
-          id_veterinaria: token.id_veterinaria,
+          veterinariaId: token.veterinariaId,
         }
       }
       return session

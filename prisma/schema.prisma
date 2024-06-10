@@ -7,6 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
 model User {
   id             String    @id @default(uuid())
   username       String    @unique
@@ -15,8 +16,9 @@ model User {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime? @updatedAt
   rol            String
-  id_veterinaria Int
   name           String
+  veterinariaId  Int?
+  veterinaria    Veterinaria? @relation(fields: [veterinariaId], references: [id])
   sessions       Session[]
 }
 
@@ -29,4 +31,44 @@ model Session {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   user         User     @relation(fields: [userId], references: [id])
+}
+
+model Veterinaria {
+  id           Int       @id @default(autoincrement())
+  nombre       String    @unique
+  direccion    String    @unique
+  telefono     String    @unique
+  proprietario String
+  proprietario2 String?
+  logoImage    String?    @unique
+  users        User[]
+  mascotas     Mascota[]
+  clientes     Cliente[]
+}
+
+model Mascota { 
+  id               Int        @id @default(autoincrement())
+  nombre           String
+  especie          String
+  peso             Int?
+  fecha_nacimiento DateTime
+  clienteId        Int
+  veterinariaId    Int
+  veterinaria      Veterinaria @relation(fields: [veterinariaId], references: [id])
+  cliente          Cliente     @relation(fields: [clienteId], references: [id])
+}
+
+model Cliente {
+  id             Int        @id @default(autoincrement())
+  nombre         String
+  apellido       String
+  email          String
+  dni            String
+  password       String
+  telefono       String
+  telefono2      String?
+  observaciones  String?
+  veterinariaId  Int
+  veterinaria    Veterinaria @relation(fields: [veterinariaId], references: [id])
+  mascotas       Mascota[]
 }
