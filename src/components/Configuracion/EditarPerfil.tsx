@@ -17,6 +17,7 @@ import {
 import { CardContent } from "@/components/ui/card";
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import { useToast } from "@/components/ui/use-toast"
 import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
@@ -32,6 +33,8 @@ const formSchema = z.object({
 
 export function EditarPerfil() {
   const { data: session } = useSession();
+  const { toast } = useToast()
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -49,8 +52,8 @@ export function EditarPerfil() {
       form.setValue("name", name || "");
       form.setValue("newEmail", email || "" );
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
-
 
   const onSubmit = async(values: z.infer<typeof formSchema>) => {
     try {
@@ -66,10 +69,15 @@ export function EditarPerfil() {
       });
 
       if (res.ok) {
-        console.log("Perfil actualizado con éxito");
+        toast({
+          description: "Cambio de contraseña exitoso",
+        })
       } else {
-        const error = await res.json();
-        console.log("Error al actualizar el perfil:", error);
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "Hubo un error al cambiar de contraseña",
+        })
       }
     } catch (error) {
       console.error("Error al hacer la solicitud:", error);
@@ -77,52 +85,54 @@ export function EditarPerfil() {
   };
 
   return (
-    <fieldset className="grid gap-6 rounded-lg border p-4">
+    <fieldset className="grid rounded-lg border p-4">
       <legend className=" px-1 text-sm font-medium">
           Mi perfil
       </legend>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <CardContent className="grid gap-3">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-white">Usuario</FormLabel>
-                    <FormControl>
-                      <Input placeholder="" {...field} disabled/>
-                    </FormControl>
-                    <FormMessage className="text-white/70"/>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="newEmail"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-white">Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="" {...field} />
-                    </FormControl>
-                    <FormMessage className="text-white/70"/>
-                  </FormItem>
-                )}
-              />
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-7">
+          <CardContent className="grid space-y-5">
+            <div className="flex gap-2">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem className="w-1/2">
+                      <FormLabel className="">Usuario</FormLabel>
+                      <FormControl>
+                        <Input placeholder="" {...field} disabled/>
+                      </FormControl>
+                      <FormMessage className=""/>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="newEmail"
+                  render={({ field }) => (
+                    <FormItem className="w-1/2">
+                      <FormLabel className="">Email</FormLabel>
+                      <FormControl>
+                        <Input placeholder="" {...field} />
+                      </FormControl>
+                      <FormMessage className=""/>
+                    </FormItem>
+                  )}
+                />
+              </div>
               <FormField
                 control={form.control}
                 name="currentPassword"
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex items-center">
-                      <FormLabel className='text-white'>Contraseña Actual</FormLabel>
+                      <FormLabel className=''>Contraseña Actual</FormLabel>
                     </div>
                     <FormControl>
                       <Input placeholder="******" type="password" {...field} />
                     </FormControl>
-                    <FormMessage className="text-white/70" />
+                    <FormMessage className="" />
                   </FormItem>
                 )}
               />
@@ -132,12 +142,12 @@ export function EditarPerfil() {
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex items-center">
-                      <FormLabel className='text-white'>Nueva Contraseña</FormLabel>
+                      <FormLabel className=''>Nueva contraseña</FormLabel>
                     </div>
                     <FormControl>
                       <Input placeholder="******" type="password" {...field} />
                     </FormControl>
-                    <FormMessage className="text-white/70" />
+                    <FormMessage className="" />
                   </FormItem>
                 )}
               />
@@ -147,12 +157,12 @@ export function EditarPerfil() {
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex items-center">
-                      <FormLabel className='text-white'>Reingrese la Contraseña</FormLabel>
+                      <FormLabel>Reingrese la nueva contraseña</FormLabel>
                     </div>
                     <FormControl>
                       <Input placeholder="******" type="password" {...field} />
                     </FormControl>
-                    <FormMessage className="text-white/70" />
+                    <FormMessage />
                   </FormItem>
                 )}
               />

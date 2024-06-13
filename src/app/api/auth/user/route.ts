@@ -7,7 +7,7 @@ import { PrismaClient, User } from "@prisma/client";
 // Traer usuarios
 export async function GET(req: Request) {
     try {
-         const users: User[] = await db.user.findMany();
+         const users: User[] = await prisma.user.findMany();
  
          return NextResponse.json({
              users: users,

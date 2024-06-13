@@ -2,6 +2,7 @@ import { DefaultSession, DefaultUser } from "next-auth"
 import { JWT, DefaultJWT } from "next-auth/jwt"
 import { User } from "@auth/core/types"
 import { AdapterUser } from "next-auth/adapters"
+import { Veterinaria } from "./veterinaria"
 
 declare module "next-auth" {
   interface Session {
@@ -12,6 +13,7 @@ declare module "next-auth" {
       username: string,
       rol: string, 
       veterinariaId: number | null,
+      veterinaria: Veterinaria
     } & DefaultSession
   }
 

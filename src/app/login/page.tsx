@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import Image from "next/image"
 import Link from "next/link"
@@ -38,7 +38,7 @@ export default function Page() {
   const { data: session } = useSession();
 
   if (session) {
-    router.push('/dashboard/home')
+    router.push('/dashboard/inicio')
   };
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -50,7 +50,6 @@ export default function Page() {
   })
  
   const onSubmit = async(data: z.infer<typeof formSchema>) => {
-    // console.log(data)
     const res = await signIn('credentials', {
       username: data.username,
       password: data.password,
@@ -61,34 +60,34 @@ export default function Page() {
     if (res?.error) {
       setLoginError(true);
     } else {
-      router.push('/dashboard/home')
+      router.push('/dashboard/inicio')
     }
   }
   
 
   return (
     <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 h-screen">
-      <div className="flex items-center justify-center py-12">
+      <div className="flex items-center justify-center">
         <Card className="grid w-[400px]">
-          <CardHeader className="grid gap-2 text-center">
+          <CardHeader className="grid text-center">
             <h1 className="text-3xl font-bold">Iniciar Sesion</h1>
             <p className="text-balance text-muted-foreground">
               Ingrese usuario y contraseña
             </p>
           </CardHeader>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-7">
               <CardContent className="grid gap-4">
                 <FormField
                     control={form.control}
                     name="username"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-white">Usuario</FormLabel>
+                        <FormLabel>Usuario</FormLabel>
                         <FormControl>
-                          <Input placeholder="User.." {...field} />
+                          <Input placeholder="Ingrese su nombre de usuario" {...field} />
                         </FormControl>
-                        <FormMessage className="text-white/70"/>
+                        <FormMessage/>
                       </FormItem>
                     )}
                   />
@@ -98,7 +97,7 @@ export default function Page() {
                     render={({ field }) => (
                       <FormItem>
                         <div className="flex items-center">
-                          <FormLabel className='text-white'>Contraseña</FormLabel>
+                          <FormLabel>Contraseña</FormLabel>
                           <Link
                               href="/forgot-password"
                               className="ml-auto inline-block text-sm underline"
@@ -109,7 +108,7 @@ export default function Page() {
                         <FormControl>
                           <Input placeholder="******" type="password" {...field} />
                         </FormControl>
-                        <FormMessage className="text-white/70" />
+                        <FormMessage />
                       </FormItem>
                     )}
                   />

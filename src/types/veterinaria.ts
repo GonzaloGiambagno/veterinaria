@@ -4,6 +4,6 @@ export interface Veterinaria {
     direccion: string;
     telefono: string;
     proprietario: string;
-    proprietario2: string;
-    logoImage: string;
+    proprietario2: string | null;
+    logoImage: string | null;  
 }

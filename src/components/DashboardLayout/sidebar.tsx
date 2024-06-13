@@ -12,7 +12,7 @@ import { SidebarMobile } from './sidebar-mobile';
 
 const sidebarItems: SidebarItems = {
   links: [
-    { label: 'Inicio', href: '/dashboard/home', icon: Home },
+    { label: 'Inicio', href: '/dashboard/inicio', icon: Home },
   ],
   extras: (
     <div className='flex flex-col gap-2'>

@@ -39,6 +39,15 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user, session }){
       if(user) {
+        const userVet = await prisma.user.findUnique({
+          where: {
+            id: user.id,
+          },
+          include: {
+            veterinaria: true,
+          },
+        });
+
         return {
           ...token,
           id: user.id,
@@ -46,6 +55,7 @@ export const authOptions: NextAuthOptions = {
           email: user.email,
           rol: user.rol,
           veterinariaId: user.veterinariaId,
+          veterinaria: userVet?.veterinaria,
         }
       }
       return token
@@ -60,6 +70,7 @@ export const authOptions: NextAuthOptions = {
           email: token.email,
           rol: token.rol,
           veterinariaId: token.veterinariaId,
+          veterinaria: token.veterinaria
         }
       }
       return session
