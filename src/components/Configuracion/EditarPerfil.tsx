@@ -93,12 +93,12 @@ export function EditarPerfil() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-7">
           <CardContent className="grid space-y-5">
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
                 <FormField
                   control={form.control}
                   name="name"
                   render={({ field }) => (
-                    <FormItem className="w-1/2">
+                    <FormItem className="sm:w-1/2">
                       <FormLabel className="">Usuario</FormLabel>
                       <FormControl>
                         <Input placeholder="" {...field} disabled/>
@@ -111,7 +111,7 @@ export function EditarPerfil() {
                   control={form.control}
                   name="newEmail"
                   render={({ field }) => (
-                    <FormItem className="w-1/2">
+                    <FormItem className="sm:w-1/2">
                       <FormLabel className="">Email</FormLabel>
                       <FormControl>
                         <Input placeholder="" {...field} />
@@ -166,7 +166,7 @@ export function EditarPerfil() {
                   </FormItem>
                 )}
               />
-            <Button type="submit" className="justify-self-start">
+            <Button type="submit" className="sm:justify-self-start">
               Editar Perfil
             </Button>
           </CardContent>

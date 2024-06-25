@@ -2,7 +2,13 @@
 
 import {
   Home,
-  MoreHorizontal,
+  PawPrint ,
+  ClipboardPlus,
+  CalendarDays,
+  ShoppingCart,
+  ScanBarcode,
+  UserRoundCog, 
+  Notebook 
 } from 'lucide-react';
 import { SidebarDesktop } from './sidebar-desktop';
 import { SidebarItems } from '@/types/types';
@@ -13,14 +19,16 @@ import { SidebarMobile } from './sidebar-mobile';
 const sidebarItems: SidebarItems = {
   links: [
     { label: 'Inicio', href: '/dashboard/inicio', icon: Home },
+    { label: 'Clientes', href: '/dashboard/clientes', icon: PawPrint   },
+    { label: 'Historia Clinica', href: '/dashboard/historia-clinica', icon: ClipboardPlus  },
+    { label: 'Turnos', href: '/dashboard/turnos', icon: CalendarDays  },
+    { label: 'Ventas', href: '/dashboard/ventas', icon: ShoppingCart  },
+    { label: 'Caja', href: '/dashboard/caja', icon: Notebook  },
+    { label: 'Inventario', href: '/dashboard/inventario', icon: ScanBarcode  },
+    { label: 'Usuarios', href: '/dashboard/usuarios', icon: UserRoundCog   },
   ],
-  extras: (
-    <div className='flex flex-col gap-2'>
-      <SidebarButton icon={MoreHorizontal} className='w-full'>
-        Ver más
-      </SidebarButton>
-    </div>
-  ),
+  // extras: (
+  // ),
 };
 
 export function Sidebar() {

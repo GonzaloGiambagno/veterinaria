@@ -15,7 +15,6 @@ export function SidebarButton({
 }: SidebarButtonProps) {
   return (
     <Button
-      variant='ghost'
       className={cn('gap-2 justify-start', className)}
       {...props}
     >

@@ -32,7 +32,7 @@ export function SidebarDesktop(props: SidebarDesktopProps) {
             {props.sidebarItems.links.map((link, index) => (
               <Link key={index} href={link.href}>
                 <SidebarButton
-                  variant={pathname === link.href ? 'secondary' : 'ghost'}
+                  variant={pathname === link.href ? 'default' : 'ghost'}
                   icon={link.icon}
                   className='w-full'
                 >

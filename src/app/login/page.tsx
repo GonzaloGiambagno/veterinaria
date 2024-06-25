@@ -67,8 +67,8 @@ export default function Page() {
 
   return (
     <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 h-screen">
-      <div className="flex items-center justify-center">
-        <Card className="grid w-[400px]">
+      <div className="flex sm:items-center sm:justify-center">
+        <Card className="grid w-full sm:w-[400px]">
           <CardHeader className="grid text-center">
             <h1 className="text-3xl font-bold">Iniciar Sesion</h1>
             <p className="text-balance text-muted-foreground">
