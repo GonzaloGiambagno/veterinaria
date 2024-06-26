@@ -1,10 +1,14 @@
 import { NextResponse } from 'next/server';
-import { getSession  } from 'next-auth/react';
 import prisma from '@/lib/db';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/[...nextauth]/route';
 
 export async function GET(req: Request) {
   try {
-      const session = await getSession()
+    const session = await getServerSession(authOptions);
+      if (!session) {
+        return new NextResponse("No autenticado", { status: 401 });
+      }
 
       const vete = session?.user.veterinariaId
 

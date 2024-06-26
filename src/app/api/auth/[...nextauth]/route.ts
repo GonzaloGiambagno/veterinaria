@@ -58,7 +58,7 @@ export const authOptions: NextAuthOptions = {
           veterinaria: userVet?.veterinaria,
         }
       }
-      // console.log(token);
+      // console.log(this.jwt);
       return token
     },
     async session({ session, token, user }){
