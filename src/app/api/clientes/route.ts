@@ -12,9 +12,11 @@ export async function GET(req: Request) {
         where: {
           veterinariaId: vete,
         },
+        include: {
+          veterinaria: true,
+          mascotas: true, 
+        },
       });
-
-      // const veterinarias: Veterinaria[] = await prisma.veterinaria.findMany();
 
        return NextResponse.json({
           clientes,
