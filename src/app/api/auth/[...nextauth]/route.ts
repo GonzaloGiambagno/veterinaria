@@ -58,11 +58,14 @@ export const authOptions: NextAuthOptions = {
           veterinaria: userVet?.veterinaria,
         }
       }
+      // console.log(token);
       return token
     },
     async session({ session, token, user }){
+      
       return {
         ...session,
+        
         user: {
           ...session.user,
           id: token.id,

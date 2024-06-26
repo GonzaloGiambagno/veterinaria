@@ -12,7 +12,7 @@ declare module "next-auth" {
       email: string;
       username: string,
       rol: string, 
-      veterinariaId: number | null,
+      veterinariaId: number,
       veterinaria: Veterinaria
     } & DefaultSession
   }

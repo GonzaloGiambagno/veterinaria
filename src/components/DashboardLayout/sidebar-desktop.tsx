@@ -62,7 +62,7 @@ export function SidebarDesktop(props: SidebarDesktopProps) {
               <PopoverContent className='mb-2 w-56 p-3 rounded-[1rem]'>
                 <div className='space-y-1'>
                   <Link href="/dashboard/perfil">
-                    <SidebarButton size='sm' icon={Settings} className='w-full'>
+                    <SidebarButton size='sm' variant="outline" icon={Settings} className='w-full'>
                       Configuración
                     </SidebarButton>
                   </Link>
