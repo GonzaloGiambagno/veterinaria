@@ -1,8 +1,10 @@
+import TabsCliente from "@/components/Clientes/TabsCliente";
+import { ClienteProvider } from "@/context/ClienteProvider";
 
 export default function Page() {
   return (
-    <div>
-      <h1>Clientes Page</h1>
-    </div>
+    <ClienteProvider>
+      <TabsCliente />
+    </ClienteProvider>
   );
 }

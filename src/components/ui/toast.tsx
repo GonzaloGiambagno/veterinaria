@@ -6,6 +6,7 @@ import * as ToastPrimitives from "@radix-ui/react-toast"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
+import { Check, CircleAlert  } from "lucide-react"
 
 const ToastProvider = ToastPrimitives.Provider
 
@@ -32,6 +33,7 @@ const toastVariants = cva(
         default: "border bg-background text-foreground",
         destructive:
           "destructive group border-destructive bg-destructive text-destructive-foreground",
+        success: 'border border-2 border-green-500'
       },
     },
     defaultVariants: {
@@ -50,7 +52,13 @@ const Toast = React.forwardRef<
       ref={ref}
       className={cn(toastVariants({ variant }), className)}
       {...props}
-    />
+    >
+      <div className="flex items-center justify-start gap-5">
+        {variant=== 'success' && <Check className="w-7 h-8 text-primary" />}
+        {variant=== 'destructive' && <CircleAlert className="w-7 h-8 text-destructive font-bold" />}
+        {props.children}
+      </div>
+    </ToastPrimitives.Root>
   )
 })
 Toast.displayName = ToastPrimitives.Root.displayName

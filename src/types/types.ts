@@ -18,3 +18,37 @@ export interface RegisterBody {
   rol: string;
   veterinariaId: number
 }
+
+export interface Veterinaria {
+  id: number;
+  nombre: string;
+  direccion: string;
+  telefono: string;
+  proprietario: string;
+  proprietario2: string | null;
+  logoImage: string | null;  
+}
+
+export interface Cliente {
+  id: number;
+  nombre: string;
+  apellido: string; 
+  email: string;
+  dni: string;
+  password: string;
+  telefono: string;
+  telefono2: string;
+  observaciones: string;
+  veterinariaId: number;
+}
+
+export interface Mascota {
+  id: number;
+  nombre: string;
+  especie: string; 
+  peso: number;
+  fecha_nacimiento: string;
+  clienteId: number;
+  veterinariaId?: number;
+  cliente?: Cliente;
+}

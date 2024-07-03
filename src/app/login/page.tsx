@@ -56,7 +56,6 @@ export default function Page() {
       redirect: false,
     })
 
-    console.log(res)
     if (res?.error) {
       setLoginError(true);
     } else {
