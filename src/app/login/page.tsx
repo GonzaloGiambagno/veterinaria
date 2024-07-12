@@ -23,6 +23,7 @@ import { useState } from 'react';
 import { ErrorLogin } from "@/components/Login/ErrorLogin"
 import { useRouter } from "next/navigation"
 
+
 const formSchema = z.object({
   username: z.string().min(5, {
     message: "El numero de usuario debe tener más de 5 caracteres",
@@ -67,7 +68,7 @@ export default function Page() {
   return (
     <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 h-screen">
       <div className="flex sm:items-center sm:justify-center">
-        <Card className="grid w-full sm:w-[400px]">
+        <Card className="grid w-full sm:w-[400px] rounded-3xl drop-shadow-3xl">
           <CardHeader className="grid text-center">
             <h1 className="text-3xl font-bold">Iniciar Sesion</h1>
             <p className="text-balance text-muted-foreground">
@@ -125,13 +126,13 @@ export default function Page() {
           </CardFooter>
         </Card>
       </div>
-      <div className="hidden bg-muted lg:block">
+      <div className="hidden lg:flex w-full h-screen">
         <Image
-          src="/placeholder.svg"
+          src="/assets/perro3D1.jpg"
           alt="Image"
           width="1920"
-          height="1080"
-          className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+          height="920"
+          className="h-full w-full object-cover rounded-l-[250px]"
         />
       </div>
     </div>

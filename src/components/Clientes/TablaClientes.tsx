@@ -30,6 +30,7 @@ import { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import EditarCliente from "./EditarCliente";
 import { EliminarCliente } from "./EliminarCliente";
+import VerMascota from "../Mascotas/VerMascota";
 
 export const TablaClientes = () => {
   const { clientes, fetchClientes } = useCliente();
@@ -91,7 +92,7 @@ export const TablaClientes = () => {
                   <TableCell>{cliente.dni}</TableCell>
                   <TableCell>{cliente.telefono}</TableCell>
                   <TableCell>{cliente.telefono2 || "N/A"}</TableCell>
-                  <TableCell><EditarCliente id={cliente.id}/><EliminarCliente id={cliente.id}/> </TableCell>
+                  <TableCell><EditarCliente id={cliente.id}/><EliminarCliente id={cliente.id}/><VerMascota id={cliente.id}/></TableCell>
                   </TableRow>
                 ))
               ) : (

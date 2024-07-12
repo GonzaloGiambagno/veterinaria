@@ -52,6 +52,7 @@ model Mascota {
   especie          String
   peso             Int?
   fecha_nacimiento DateTime
+  fotoMascota      String?
   clienteId        Int
   veterinariaId    Int
   veterinaria      Veterinaria @relation(fields: [veterinariaId], references: [id])

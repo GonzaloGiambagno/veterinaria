@@ -48,6 +48,7 @@ export interface Mascota {
   especie: string; 
   peso: number;
   fecha_nacimiento: string;
+  fotoMascota: string;
   clienteId: number;
   veterinariaId?: number;
   cliente?: Cliente;

@@ -31,6 +31,8 @@ import { Input } from "../ui/input";
 import EditarMascota from "./EditarMascota";
 import { EliminarMascota } from "./EliminarMascota";
 import moment from "moment";
+import Image from "next/image";
+import VerMascota from "./VerMascota";
 
 export const TablaMascotas = () => {
   const { mascotas, fetchMascotas } = useCliente();
@@ -74,6 +76,7 @@ export const TablaMascotas = () => {
         <Table>
           <TableHeader>
             <TableRow>
+              <TableHead>Foto</TableHead>
               <TableHead>Nombre</TableHead>
               <TableHead>Especie</TableHead>
               <TableHead>Peso</TableHead>
@@ -88,12 +91,23 @@ export const TablaMascotas = () => {
             {Array.isArray(filteredMascota) && filteredMascota.length > 0 ? (
               filteredMascota.map((mascota) => (
                 <TableRow key={mascota.id}>
+                      <TableCell className="hidden sm:table-cell">
+                        { mascota.fotoMascota ? 
+                          <Image
+                            alt=""
+                            className="aspect-square rounded-md object-cover"
+                            height="64"
+                            src={mascota.fotoMascota}
+                            width="64"
+                          /> : <p> -- </p>
+                        }
+                      </TableCell>
                   <TableCell>{mascota.nombre}</TableCell>
                   <TableCell>{mascota.especie}</TableCell>
                   <TableCell>{mascota.peso}Kg</TableCell>
                   <TableCell>{moment(mascota.fecha_nacimiento).utc().format("DD/MM/YYYY")}</TableCell>
-                  <TableCell>{mascota.cliente?.apellido} {mascota.cliente?.apellido}</TableCell>
-                  <TableCell><EditarMascota id={mascota.id}/><EliminarMascota id={mascota.id}/> </TableCell>
+                  <TableCell>{mascota.cliente?.apellido} {mascota.cliente?.nombre}</TableCell>
+                  <TableCell><EditarMascota id={mascota.id}/><EliminarMascota id={mascota.id}/></TableCell>
                 </TableRow>
               ))
             ) : (

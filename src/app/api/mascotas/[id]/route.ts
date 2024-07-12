@@ -9,7 +9,8 @@ const updateMascotaSchema = z.object({
   nombre: z.string().optional(),
   especie: z.string().optional(),
   peso: z.number().optional(),
-  fecha_nacimiento: z.string()
+  fecha_nacimiento: z.string(),
+  fotoMascota: z.string().optional()
 });
 
 interface Params {
@@ -61,7 +62,7 @@ export async function PUT(req: NextRequest, { params }: { params: Params }) {
     
     const body = await req.json();
 
-    const { nombre, especie, peso, fecha_nacimiento } = updateMascotaSchema.parse(body);
+    const { nombre, especie, peso, fecha_nacimiento, fotoMascota } = updateMascotaSchema.parse(body);
     const fechaNacimiento = moment(fecha_nacimiento, "YYYY-MM-DD").utc().toDate();
 
     if (!moment(fecha_nacimiento, "YYYY-MM-DD").isValid()) {
@@ -87,6 +88,7 @@ export async function PUT(req: NextRequest, { params }: { params: Params }) {
         especie,
         peso,
         fecha_nacimiento: fechaNacimiento,
+        fotoMascota
       },
     });
     
